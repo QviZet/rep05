@@ -72,8 +72,8 @@ TEST(Transaction, SaveToDataBase){
 // ..................................tests generation.............
 
 TEST(MockAcc, Lock){
-    Mock_acc acc1(1, 200);
-    Mock_acc acc2(2, 300);
+    MockAcc acc1(1, 200);
+    MockAcc acc2(2, 300);
     Transaction tr1;
 
     EXPECT_CALL(acc1, Lock()).Times(::testing::AtLeast(1));
@@ -81,8 +81,8 @@ TEST(MockAcc, Lock){
 }
 
 TEST(MockAcc, Unlock){
-    Mock_acc acc1(1, 200);
-    Mock_acc acc2(2, 300);
+    MockAcc acc1(1, 200);
+    MockAcc acc2(2, 300);
     Transaction tr1;
 
     EXPECT_CALL(acc1, Unlock()).Times(::testing::AtLeast(1));
@@ -90,8 +90,8 @@ TEST(MockAcc, Unlock){
 }
 
 TEST(MockAcc, GetBalance){
-    Mock_acc acc1(1, 200);
-    Mock_acc acc2(2, 300);
+    MockAcc acc1(1, 200);
+    MockAcc acc2(2, 300);
     Transaction tr1;
 
     EXPECT_CALL(acc1, GetBalance()).Times(::testing::AtLeast(1));
@@ -99,8 +99,8 @@ TEST(MockAcc, GetBalance){
 }
 
 TEST(MockAcc, ChangeBalance){
-    Mock_acc acc1(1, 200);
-    Mock_acc acc2(2, 300);
+    MockAcc acc1(1, 200);
+    MockAcc acc2(2, 300);
     Transaction tr1;
 
     ON_CALL(acc1, GetBalance()).WillByDefault(::testing::Return(200));
