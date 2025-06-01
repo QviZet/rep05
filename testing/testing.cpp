@@ -24,14 +24,14 @@ public:
 
 TEST(Account, GetBalance){
     Account acc1(1, 10);
-    int balance = makak.GetBalance();
+    int balance = acc1.GetBalance();
     EXPECT_EQ(balance, 10);
 }
 
 TEST(Account,ChangeBalance){
     Account acc1(1, 10);
     ASSERT_THROW(acc1.ChangeBalance(20), std::runtime_error);
-    makak.Lock();
+    acc1.Lock();
     acc1.ChangeBalance(15);
     int balance = acc1.GetBalance(); 
     EXPECT_EQ(balance, 10 + 20);
@@ -44,9 +44,9 @@ TEST(Account, Lock){
 
 TEST(Account, Unlock){
     Account acc1(1, 10);
-    acc.Lock();
+    acc1.Lock();
     ASSERT_NO_THROW(acc1.ChangeBalance(20));
-    makak.Unlock();
+    acc1.Unlock();
     ASSERT_THROW(acc1.ChangeBalance(15), std::runtime_error);
 }
 
@@ -57,15 +57,15 @@ TEST(Transaction, Make){
     Account acc2(2, 300);
     Transaction tr1;
     tr1.set_fee(10);
-    bool suc = trans.Make(acc1, acc2, 150);
+    bool suc = tr1.Make(acc1, acc2, 150);
     EXPECT_TRUE(suc);
 }
 
 TEST(Transaction, SaveToDataBase){
-    Transaction trans;
+    Transaction tr1;
     Account acc1(1, 200);
     Account acc2(2, 300);
-    bool suc = trans.Make(acc1, acc2, 150);
+    bool suc = tr1.Make(acc1, acc2, 150);
     EXPECT_TRUE(suc);
 }
 
@@ -77,7 +77,7 @@ TEST(MockAcc, Lock){
     Transaction tr1;
 
     EXPECT_CALL(acc1, Lock()).Times(::testing::AtLeast(1));
-    bool suc = trans.Make(acc1, acc2, 150);
+    bool suc = tr1.Make(acc1, acc2, 150);
 }
 
 TEST(MockAcc, Unlock){
