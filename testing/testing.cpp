@@ -32,7 +32,7 @@ TEST(Account,ChangeBalance){
     Account acc1(1, 10);
     ASSERT_THROW(acc1.ChangeBalance(20), std::runtime_error);
     acc1.Lock();
-    acc1.ChangeBalance(15);
+    acc1.ChangeBalance(20);
     int balance = acc1.GetBalance(); 
     EXPECT_EQ(balance, 10 + 20);
 }
