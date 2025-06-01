@@ -28,3 +28,14 @@ jobs:
       working-directory: ${{github.workspace}}/build
       run: testing/testing && cd testing && ctest --output-on-failure 
 
+    - name: Coverage
+      run: |
+        lcov --directory . --capture --output-file coverage.info --ignore-errors mismatch
+        lcov --remove coverage.info '*/googletest/*' '/usr/*' --output-file coverage.info
+        genhtml coverage.info --output-directory coverage_report --ignore-errors mismatch
+
+    - name: Coveralls
+      uses: coverallsapp/github-action@master
+      with:
+        path-to-lcov: ${{github.workspace}}/coverage.info
+        github-token: ${{ secrets.GITHUB_TOKEN }}
